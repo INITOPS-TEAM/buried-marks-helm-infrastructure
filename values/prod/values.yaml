@@ -1,0 +1,23 @@
+admin-front:
+  replicaCount: 2
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    pullPolicy: IfNotPresent
+    
+login-front:
+  replicaCount: 2
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
+    pullPolicy: IfNotPresent
+
+map-front:
+  replicaCount: 2
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
+    pullPolicy: IfNotPresent
+
+voting-front:
+  replicaCount: 2
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
+    pullPolicy: IfNotPresent    

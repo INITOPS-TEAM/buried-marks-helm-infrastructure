@@ -1,0 +1,6 @@
+apiVersion: v2
+name: admin-front
+description: Frontend microservice for admin page (buried-marks)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
