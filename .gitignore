@@ -10,7 +10,6 @@
 *.tmproj
 .git/
 .helmignore
-charts/
 *.tgz
 *.lock
 logs/
