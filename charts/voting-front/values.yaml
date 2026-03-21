@@ -1,0 +1,51 @@
+replicaCount: 1
+
+image:
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets:
+  - name: ecr-secret
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 8080
+
+httpRoute:
+  enabled: true
+  annotations: {}
+  parentRefs:
+    - name: buried-marks-gateway
+      sectionName: http
+  hostnames:
+    - buried-marks.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /voting/
+
+resources: {}
+
+envSecret: front-secret
+
+livenessProbe: {}
+readinessProbe: {}

@@ -1,0 +1,52 @@
+global:
+  isEKS: true
+
+map-service:
+  replicaCount: 1
+  livenessProbe:
+    httpGet:
+      path: /health/
+      port: 9001
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 10
+  readinessProbe:
+    httpGet:
+      path: /health/
+      port: 9001
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 10
+  mariadb:
+    primary:
+      persistence:
+        enabled: true
+        size: 1Gi
+
+auth-service:
+  replicaCount: 1
+  livenessProbe: {}
+  readinessProbe: {}
+  postgresql:
+    primary:
+      persistence:
+        enabled: true
+        size: 3Gi
+
+mail-service:
+  replicaCount: 1
+  valkey:
+    primary:
+      persistence:
+        enabled: true
+        size: 1Gi
+
+voting-service:
+  replicaCount: 1
+  livenessProbe: {}
+  readinessProbe: {}
+  postgresql:
+    primary:
+      persistence:
+        enabled: true
+        size: 5Gi

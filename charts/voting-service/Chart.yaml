@@ -1,0 +1,15 @@
+apiVersion: v2
+name: voting-service
+description: Buried Marks voting microservice
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+
+dependencies:
+  - name: postgresql
+    version: "18.5.10"
+    repository: https://charts.bitnami.com/bitnami
+  - name: common
+    version: "0.1.0"
+    repository: "file://../common"

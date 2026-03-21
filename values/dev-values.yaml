@@ -1,0 +1,70 @@
+global:
+  isEKS: false
+
+map-service:
+  image:
+    repository: buried-marks-map-service
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+  livenessProbe: {}
+  readinessProbe: {}
+
+auth-service:
+  image:
+    repository: buried-marks-auth-service
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+  livenessProbe: {}
+  readinessProbe: {}
+
+mail-service:
+  image:
+    repository: buried-marks-mail-service
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+
+voting-service:
+  image:
+    repository: buried-marks-voting-service
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+
+login-front:
+  image:
+    repository: buried-marks-login-front
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+
+map-front:
+  image:
+    repository: buried-marks-map-front
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+
+voting-front:
+  image:
+    repository: buried-marks-voting-front
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+
+admin-front:
+  image:
+    repository: buried-marks-admin-front
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []

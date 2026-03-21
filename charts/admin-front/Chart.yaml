@@ -1,0 +1,11 @@
+apiVersion: v2
+name: admin-front
+description: Buried Marks admin-front microservice
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+dependencies:
+  - name: common
+    version: "0.1.0"
+    repository: "file://../common"
