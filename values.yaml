@@ -3,9 +3,9 @@ global:
     region: eu-north-1
   secrets:
     map-service: buried-marks/map-service
-    auth-service: buried-marks/map-service
-    mail-service: buried-marks/map-service
-    voting-service: buried-marks/map-service
+    auth-service: buried-marks/auth-service
+    mail-service: buried-marks/mail-service
+    voting-service: buried-marks/voting-service
   isEKS: false
   gateway:
     name: buried-marks-gateway

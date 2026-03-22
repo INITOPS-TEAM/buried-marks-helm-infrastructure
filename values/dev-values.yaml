@@ -11,6 +11,7 @@ map-service:
   podSecurityContext: {}
   livenessProbe: {}
   readinessProbe: {}
+  httpRoute: false
 
 auth-service:
   image:
@@ -22,6 +23,7 @@ auth-service:
   podSecurityContext: {}
   livenessProbe: {}
   readinessProbe: {}
+  httpRoute: false
 
 mail-service:
   image:
@@ -31,6 +33,7 @@ mail-service:
   imagePullSecrets: []
   securityContext: {}
   podSecurityContext: {}
+  httpRoute: false
 
 voting-service:
   image:
@@ -40,6 +43,7 @@ voting-service:
   imagePullSecrets: []
   securityContext: {}
   podSecurityContext: {}
+  httpRoute: false
 
 login-front:
   image:
@@ -47,6 +51,7 @@ login-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
+  httpRoute: false
 
 map-front:
   image:
@@ -54,6 +59,7 @@ map-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
+  httpRoute: false
 
 voting-front:
   image:
@@ -61,6 +67,7 @@ voting-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
+  httpRoute: false
 
 admin-front:
   image:
@@ -68,3 +75,4 @@ admin-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
+  httpRoute: false

@@ -16,14 +16,14 @@ serviceAccount:
 
 podSecurityContext: {}
 
-securityContext:
-  allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: false
-  runAsNonRoot: true
-  runAsUser: 1000
-  capabilities:
-    drop:
-      - ALL
+# securityContext:
+#   allowPrivilegeEscalation: false
+#   readOnlyRootFilesystem: false
+#   runAsNonRoot: true
+#   runAsUser: 1000
+#   capabilities:
+#     drop:
+#       - ALL
 
 service:
   type: ClusterIP
@@ -39,6 +39,10 @@ awsSecretName: buried-marks/mail-service
 
 livenessProbe: {}
 readinessProbe: {}
+
+db:
+  host: mail-service-valkey-primary
+  port: 6379
 
 valkey:
   auth:

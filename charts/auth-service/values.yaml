@@ -105,10 +105,12 @@ volumes:
 
 volumeMounts:
   - name: jwt-public-key
-    mountPath: "/tmp/jwt_public_key"
+    mountPath: "/app/public.pem"
+    subPath: ec_public.key
     readOnly: true
   - name: jwt-private-key
-    mountPath: "/tmp/jwt_private_key"
+    mountPath: "/app/private.pem"
+    subPath: ec_private.key
     readOnly: true
 
 db:
@@ -118,8 +120,8 @@ db:
 postgresql:
   auth:
     existingSecret: auth-service-secret
-    database: buriedmarks
-    username: buriedmarks
+    database: auth_db
+    username: db_admin
   primary:
     persistence:
       enabled: false

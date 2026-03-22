@@ -1,0 +1,65 @@
+environments:
+  dev:
+    values:
+      - values/dev-values.yaml
+  prod:
+    values:
+      - values/prod-values.yaml
+
+---
+
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: external-secrets
+    url: https://charts.external-secrets.io
+
+releases:
+  - name: auth-service
+    chart: charts/auth-service
+    namespace: buried-marks
+    values:
+      - values/{{ .Environment.Name }}-values.yaml
+
+  - name: mail-service
+    chart: charts/mail-service
+    namespace: buried-marks
+    values:
+      - values/{{ .Environment.Name }}-values.yaml
+
+  - name: map-service
+    chart: charts/map-service
+    namespace: buried-marks
+    values:
+      - values/{{ .Environment.Name }}-values.yaml
+
+  - name: voting-service
+    chart: charts/voting-service
+    namespace: buried-marks
+    values:
+      - values/{{ .Environment.Name }}-values.yaml
+
+# # Could be changed
+# - name: login-front
+#   chart: charts/login-front
+#   namespace: buried-marks
+#   values:
+#     - values/{{ .Environment.Name }}-values.yaml
+
+# - name: map-front
+#   chart: charts/map-front
+#   namespace: buried-marks
+#   values:
+#     - values/{{ .Environment.Name }}-values.yaml
+
+# - name: voting-front
+#   chart: charts/voting-front
+#   namespace: buried-marks
+#   values:
+#     - values/{{ .Environment.Name }}-values.yaml
+
+# - name: admin-front
+#   chart: charts/admin-front
+#   namespace: buried-marks
+#   values:
+#     - values/{{ .Environment.Name }}-values.yaml

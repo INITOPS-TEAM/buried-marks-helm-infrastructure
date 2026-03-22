@@ -20,8 +20,8 @@ podSecurityContext:
 securityContext:
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: false
-  runAsNonRoot: true
-  runAsUser: 1000
+  runAsNonRoot: false
+  runAsUser: 0
   capabilities:
     drop:
       - ALL
@@ -68,8 +68,9 @@ volumes:
 
 volumeMounts:
   - name: jwt-public-key
-    mountPath: "/tmp/jwt_public_key"
-    readOnly: true
+    mountPath: "/tmp/jwt_public_key/ec_public.key"
+    subPath: ec_public.key
+    readOnly: false
 
 db:
   host: voting-service-postgresql
@@ -78,8 +79,8 @@ db:
 postgresql:
   auth:
     existingSecret: voting-service-secret
-    database: buriedmarks
-    username: buriedmarks
+    database: voting_db
+    username: admin
   primary:
     persistence:
       enabled: false

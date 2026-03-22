@@ -15,9 +15,9 @@ spec:
       auth:
         secretRef:
           accessKeyIDSecretRef:
-            name: awssm-credentials
+            name: aws-sm-credentials
             key: access-key
           secretAccessKeySecretRef:
-            name: awssm-credentials
+            name: aws-sm-credentials
             key: secret-access-key
 {{- end }}
