@@ -18,6 +18,13 @@ repositories:
     url: https://charts.external-secrets.io
 
 releases:
+  - name: gateway
+    chart: charts/gateway
+    namespace: buried-marks
+    condition: global.gateway.enabled
+    values:
+      - values/{{ .Environment.Name }}-values.yaml
+
   - name: alb
     chart: charts/alb
     namespace: alb-ingress

@@ -1,0 +1,10 @@
+gatewayClassName: envoy
+
+namespace: buried-marks
+
+listeners:
+- name: http
+  port: 80
+  protocol: HTTP
+
+controllerName: gateway.envoyproxy.io/gatewayclass-controller

@@ -1,6 +1,8 @@
 global:
   isEKS:
     enabled: true
+  gateway:
+    enabled: false
 
 map-service:
   image:

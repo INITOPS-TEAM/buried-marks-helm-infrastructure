@@ -1,6 +1,8 @@
 global:
   isEKS:
     enabled: false
+  gateway:
+    enabled: true
 
 map-service:
   image:
@@ -13,7 +15,7 @@ map-service:
   livenessProbe: {}
   readinessProbe: {}
   httpRoute:
-    enabled: false
+    enabled: true
 
 auth-service:
   image:
@@ -26,7 +28,7 @@ auth-service:
   livenessProbe: {}
   readinessProbe: {}
   httpRoute:
-    enabled: false
+    enabled: true
 
 mail-service:
   image:
@@ -37,7 +39,7 @@ mail-service:
   securityContext: {}
   podSecurityContext: {}
   httpRoute:
-    enabled: false
+    enabled: true
 
 voting-service:
   image:
@@ -48,7 +50,7 @@ voting-service:
   securityContext: {}
   podSecurityContext: {}
   httpRoute:
-    enabled: false
+    enabled: true
 
 login-front:
   image:
@@ -57,7 +59,7 @@ login-front:
     tag: "latest"
   imagePullSecrets: []
   httpRoute:
-    enabled: false
+    enabled: true
 
 map-front:
   image:
@@ -66,7 +68,7 @@ map-front:
     tag: "latest"
   imagePullSecrets: []
   httpRoute:
-    enabled: false
+    enabled: true
 
 voting-front:
   image:
@@ -75,7 +77,7 @@ voting-front:
     tag: "latest"
   imagePullSecrets: []
   httpRoute:
-    enabled: false
+    enabled: true
 
 admin-front:
   image:
@@ -84,4 +86,4 @@ admin-front:
     tag: "latest"
   imagePullSecrets: []
   httpRoute:
-    enabled: false
+    enabled: true
