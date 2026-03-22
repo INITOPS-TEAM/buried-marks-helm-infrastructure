@@ -1,13 +1,62 @@
 replicaCount: 1
 
 image:
-  tag: "latest"
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
   pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 8080
+
+httpRoute:
+  enabled: true
+  annotations: {}
+  parentRefs:
+    - name: buried-marks-gateway
+      sectionName: http
+  hostnames:
+    - buried-marks.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /map/
 
 resources:
   requests:
     cpu: 10m
     memory: 32Mi
   limits:
-    cpu: 30m
+    cpu: 50m
     memory: 64Mi
+
+envSecret: map-front-secret
+
+livenessProbe: {}
+
+readinessProbe:
+  httpGet:
+    path: /map/
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10

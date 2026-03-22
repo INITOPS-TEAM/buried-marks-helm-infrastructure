@@ -1,6 +1,11 @@
 apiVersion: v2
 name: voting-front
-description: Frontend microservice for voting page (buried-marks)
+description: Buried Marks voting-front microservice
 type: application
 version: 0.1.0
-appVersion: "1.0.0"
+appVersion: "latest"
+
+dependencies:
+  - name: common
+    version: "0.1.0"
+    repository: "file://../common"
