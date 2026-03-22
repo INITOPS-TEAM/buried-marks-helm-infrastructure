@@ -1,5 +1,6 @@
 global:
-  isEKS: false
+  isEKS:
+    enabled: false
 
 map-service:
   image:
@@ -11,7 +12,8 @@ map-service:
   podSecurityContext: {}
   livenessProbe: {}
   readinessProbe: {}
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 auth-service:
   image:
@@ -23,7 +25,8 @@ auth-service:
   podSecurityContext: {}
   livenessProbe: {}
   readinessProbe: {}
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 mail-service:
   image:
@@ -33,7 +36,8 @@ mail-service:
   imagePullSecrets: []
   securityContext: {}
   podSecurityContext: {}
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 voting-service:
   image:
@@ -43,7 +47,8 @@ voting-service:
   imagePullSecrets: []
   securityContext: {}
   podSecurityContext: {}
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 login-front:
   image:
@@ -51,7 +56,8 @@ login-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 map-front:
   image:
@@ -59,7 +65,8 @@ map-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 voting-front:
   image:
@@ -67,7 +74,8 @@ voting-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
-  httpRoute: false
+  httpRoute:
+    enabled: false
 
 admin-front:
   image:
@@ -75,4 +83,5 @@ admin-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
-  httpRoute: false
+  httpRoute:
+    enabled: false

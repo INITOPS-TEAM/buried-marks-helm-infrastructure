@@ -7,72 +7,30 @@ map-service:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
-  replicaCount: 2
   httpRoute:
     enabled: false
-  livenessProbe:
-    httpGet:
-      path: /health/
-      port: 9001
-    initialDelaySeconds: 5
-    periodSeconds: 10
-    failureThreshold: 10
-  readinessProbe:
-    httpGet:
-      path: /health/
-      port: 9001
-    initialDelaySeconds: 5
-    periodSeconds: 10
-    failureThreshold: 10
-  mariadb:
-    primary:
-      persistence:
-        enabled: true
-        size: 1Gi
 
 auth-service:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
-  replicaCount: 2
   httpRoute:
     enabled: false
-  livenessProbe: {}
-  readinessProbe: {}
-  postgresql:
-    primary:
-      persistence:
-        enabled: true
-        size: 3Gi
 
 mail-service:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
-  replicaCount: 1
-  valkey:
-    primary:
-      persistence:
-        enabled: true
-        size: 1Gi
 
 voting-service:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
-  replicaCount: 2
   httpRoute:
     enabled: false
-  livenessProbe: {}
-  readinessProbe: {}
-  postgresql:
-    primary:
-      persistence:
-        enabled: true
-        size: 5Gi
 
 login-front:
   image:

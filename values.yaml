@@ -6,7 +6,8 @@ global:
     auth-service: buried-marks/auth-service
     mail-service: buried-marks/mail-service
     voting-service: buried-marks/voting-service
-  isEKS: false
+  isEKS:
+    enabled: false
   gateway:
     name: buried-marks-gateway
     hostnames:

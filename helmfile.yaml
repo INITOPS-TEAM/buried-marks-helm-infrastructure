@@ -2,6 +2,9 @@ environments:
   dev:
     values:
       - values/dev-values.yaml
+  stage:
+    values:
+      - values/stage-values.yaml
   prod:
     values:
       - values/prod-values.yaml
@@ -15,6 +18,14 @@ repositories:
     url: https://charts.external-secrets.io
 
 releases:
+  - name: alb
+    chart: charts/alb
+    namespace: alb-ingress
+    createNamespace: true
+    condition: global.isEKS.enabled
+    values:
+      - values/{{ .Environment.Name }}-values.yaml
+
   - name: auth-service
     chart: charts/auth-service
     namespace: buried-marks
