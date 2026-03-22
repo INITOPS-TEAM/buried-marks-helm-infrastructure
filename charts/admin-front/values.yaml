@@ -1,0 +1,60 @@
+replicaCount: 1
+
+image:
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 8080
+
+httpRoute:
+  enabled: true
+  annotations: {}
+  parentRefs:
+    - name: buried-marks-gateway
+      sectionName: http
+  hostnames:
+    - buried-marks.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /admin/
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 50m
+    memory: 64Mi
+
+livenessProbe: {}
+
+readinessProbe:
+  httpGet:
+    path: /admin/
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
