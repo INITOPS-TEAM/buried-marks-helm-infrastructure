@@ -83,7 +83,6 @@ kubectl create secret generic map-service-secret --from-env-file=env/.env.map -n
 kubectl create secret generic auth-service-secret --from-env-file=env/.env.auth -n buried-marks
 kubectl create secret generic mail-service-secret --from-env-file=env/.env.mail -n buried-marks
 kubectl create secret generic voting-service-secret --from-env-file=env/.env.voting -n buried-marks
-kubectl create secret generic front-secret --from-env-file=env/.env.front -n buried-marks
 kubectl create secret generic map-front-secret --from-env-file=env/.env.map.front -n buried-marks
 ```
 

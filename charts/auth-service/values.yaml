@@ -6,7 +6,7 @@ image:
   tag: "latest"
 
 imagePullSecrets:
-  - name: ecr-secret
+- name: ecr-secret
 
 serviceAccount:
   create: false
@@ -24,7 +24,7 @@ securityContext:
   runAsUser: 1000
   capabilities:
     drop:
-      - ALL
+    - ALL
 
 service:
   type: ClusterIP
@@ -34,43 +34,43 @@ httpRoute:
   enabled: true
   annotations: {}
   parentRefs:
-    - name: buried-marks-gateway
-      sectionName: http
+  - name: buried-marks-gateway
+    sectionName: http
   hostnames:
-    - buried-marks.local
+  - buried-marks.local
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /api/login/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /api/token/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /api/update-password/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /api/emails/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /api/users/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /architect/send-email/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /invite/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /accept-invite/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/login/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/token/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/update-password/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/emails/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/users/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /architect/send-email/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /invite/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /accept-invite/
 
 resources: {}
 
@@ -94,24 +94,24 @@ awsSecretName: buried-marks/auth-service
 #   failureThreshold: 10
 
 volumes:
-  - name: jwt-public-key
-    secret:
-      secretName: jwt-public-key
-      optional: false
-  - name: jwt-private-key
-    secret:
-      secretName: jwt-private-key
-      optional: false
+- name: jwt-public-key
+  secret:
+    secretName: jwt-public-key
+    optional: false
+- name: jwt-private-key
+  secret:
+    secretName: jwt-private-key
+    optional: false
 
 volumeMounts:
-  - name: jwt-public-key
-    mountPath: "/app/public.pem"
-    subPath: ec_public.key
-    readOnly: true
-  - name: jwt-private-key
-    mountPath: "/app/private.pem"
-    subPath: ec_private.key
-    readOnly: true
+- name: jwt-public-key
+  mountPath: "/app/public.pem"
+  subPath: ec_public.key
+  readOnly: true
+- name: jwt-private-key
+  mountPath: "/app/private.pem"
+  subPath: ec_private.key
+  readOnly: true
 
 db:
   host: auth-service-postgresql

@@ -6,7 +6,7 @@ image:
   tag: "latest"
 
 imagePullSecrets:
-  - name: ecr-secret
+- name: ecr-secret
 
 serviceAccount:
   create: false
@@ -23,7 +23,7 @@ securityContext:
   runAsUser: 1000
   capabilities:
     drop:
-      - ALL
+    - ALL
 
 service:
   type: ClusterIP
@@ -33,19 +33,29 @@ httpRoute:
   enabled: true
   annotations: {}
   parentRefs:
-    - name: buried-marks-gateway
-      sectionName: http
+  - name: buried-marks-gateway
+    sectionName: http
   hostnames:
-    - buried-marks.local
+  - buried-marks.local
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /voting/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /voting/
 
-resources: {}
-
-envSecret: front-secret
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 50m
+    memory: 64Mi
 
 livenessProbe: {}
-readinessProbe: {}
+
+readinessProbe:
+  httpGet:
+    path: /voting/
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10

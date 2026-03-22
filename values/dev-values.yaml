@@ -6,7 +6,7 @@ global:
 
 map-service:
   image:
-    repository: buried-marks-map-service
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -19,7 +19,7 @@ map-service:
 
 auth-service:
   image:
-    repository: buried-marks-auth-service
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -32,7 +32,7 @@ auth-service:
 
 mail-service:
   image:
-    repository: buried-marks-mail-service
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -43,7 +43,7 @@ mail-service:
 
 voting-service:
   image:
-    repository: buried-marks-voting-service
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -54,7 +54,7 @@ voting-service:
 
 login-front:
   image:
-    repository: buried-marks-login-front
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -63,7 +63,7 @@ login-front:
 
 map-front:
   image:
-    repository: buried-marks-map-front
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -72,7 +72,7 @@ map-front:
 
 voting-front:
   image:
-    repository: buried-marks-voting-front
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
@@ -81,7 +81,7 @@ voting-front:
 
 admin-front:
   image:
-    repository: buried-marks-admin-front
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []

@@ -55,9 +55,11 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.envSecret }}
           envFrom:
             - secretRef:
                 name: {{ .Values.envSecret }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

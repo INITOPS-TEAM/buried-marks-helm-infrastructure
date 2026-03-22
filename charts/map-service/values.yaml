@@ -6,7 +6,7 @@ image:
   tag: "latest"
 
 imagePullSecrets:
-  - name: ecr-secret
+- name: ecr-secret
 
 serviceAccount:
   create: false
@@ -48,9 +48,7 @@ httpRoute:
         type: PathPrefix
         value: /api/categories/
 
-
 resources: {}
-
 
 envSecret: map-service-secret
 awsSecretName: buried-marks/auth-service
@@ -63,19 +61,17 @@ readinessProbe:
   periodSeconds: 10
   failureThreshold: 10
 
-
 volumes:
-  - name: jwt-public-key
-    secret:
-      secretName: jwt-public-key
-      optional: false
+- name: jwt-public-key
+  secret:
+    secretName: jwt-public-key
+    optional: false
 
 volumeMounts:
-  - name: jwt-public-key
-    mountPath: "/app/ec_public.key"
-    subPath: ec_public.key
-    readOnly: false
-
+- name: jwt-public-key
+  mountPath: "/app/ec_public.key"
+  subPath: ec_public.key
+  readOnly: false
 
 db:
   host: map-service-mariadb

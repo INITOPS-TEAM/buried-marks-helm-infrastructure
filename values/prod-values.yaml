@@ -54,6 +54,8 @@ mail-service:
     pullPolicy: IfNotPresent
     tag: "latest"
   replicaCount: 1
+  httpRoute:
+    enabled: false
   valkey:
     primary:
       persistence:
@@ -77,6 +79,7 @@ voting-service:
         size: 5Gi
 
 login-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
     pullPolicy: IfNotPresent
@@ -85,6 +88,7 @@ login-front:
     enabled: false
 
 map-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
     pullPolicy: IfNotPresent
@@ -93,6 +97,7 @@ map-front:
     enabled: false
 
 voting-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
     pullPolicy: IfNotPresent
@@ -101,6 +106,7 @@ voting-front:
     enabled: false
 
 admin-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
     pullPolicy: IfNotPresent

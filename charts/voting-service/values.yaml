@@ -6,7 +6,7 @@ image:
   tag: "latest"
 
 imagePullSecrets:
-  - name: ecr-secret
+- name: ecr-secret
 
 serviceAccount:
   create: false
@@ -24,7 +24,7 @@ securityContext:
   runAsUser: 0
   capabilities:
     drop:
-      - ALL
+    - ALL
 
 service:
   type: ClusterIP
@@ -34,23 +34,23 @@ httpRoute:
   enabled: true
   annotations: {}
   parentRefs:
-    - name: buried-marks-gateway
-      sectionName: http
+  - name: buried-marks-gateway
+    sectionName: http
   hostnames:
-    - buried-marks.local
+  - buried-marks.local
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /api/polls/
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /docs
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /openapi.json
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/polls/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /docs
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /openapi.json
 
 resources: {}
 
@@ -61,16 +61,16 @@ livenessProbe: {}
 readinessProbe: {}
 
 volumes:
-  - name: jwt-public-key
-    secret:
-      secretName: jwt-public-key
-      optional: false
+- name: jwt-public-key
+  secret:
+    secretName: jwt-public-key
+    optional: false
 
 volumeMounts:
-  - name: jwt-public-key
-    mountPath: "/tmp/jwt_public_key/ec_public.key"
-    subPath: ec_public.key
-    readOnly: false
+- name: jwt-public-key
+  mountPath: "/tmp/jwt_public_key/ec_public.key"
+  subPath: ec_public.key
+  readOnly: false
 
 db:
   host: voting-service-postgresql
