@@ -4,7 +4,8 @@ namespace: buried-marks
 
 listeners:
 - name: http
-  port: 80
+  # port: 80
+  port: 8888
   protocol: HTTP
 
 controllerName: gateway.envoyproxy.io/gatewayclass-controller

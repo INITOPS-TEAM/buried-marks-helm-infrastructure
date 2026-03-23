@@ -10,5 +10,5 @@ global:
   isEKS: false
   gateway:
     name: buried-marks-gateway
-    hostnames:
-    - buried-marks.local
+    # hostnames:
+    # - buried-marks.local

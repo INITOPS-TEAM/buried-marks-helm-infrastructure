@@ -33,7 +33,7 @@ Helm charts for Buried Marks microservices deployment on Kubernetes.
 - [helm diff plugin](https://github.com/databus23/helm-diff)
 - AWS CLI configured with access to ECR
 
-<!-- ## Install Externel Secrets Operator
+<!-- ## Install External Secrets Operator
 
 ```bash
 helm repo add external-secrets https://charts.external-secrets.io

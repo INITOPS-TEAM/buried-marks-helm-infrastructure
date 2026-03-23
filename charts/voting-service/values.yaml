@@ -36,8 +36,8 @@ httpRoute:
   parentRefs:
   - name: buried-marks-gateway
     sectionName: http
-  hostnames:
-  - buried-marks.local
+  # hostnames:
+  # - buried-marks.local
   rules:
   - matches:
     - path:

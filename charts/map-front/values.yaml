@@ -16,14 +16,14 @@ serviceAccount:
 
 podSecurityContext: {}
 
-securityContext:
-  allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: false
-  runAsNonRoot: true
-  runAsUser: 1000
-  capabilities:
-    drop:
-    - ALL
+# securityContext:
+#   allowPrivilegeEscalation: false
+#   readOnlyRootFilesystem: false
+#   runAsNonRoot: true
+#   runAsUser: 1000
+#   capabilities:
+#     drop:
+#     - ALL
 
 service:
   type: ClusterIP
@@ -35,8 +35,8 @@ httpRoute:
   parentRefs:
   - name: buried-marks-gateway
     sectionName: http
-  hostnames:
-  - buried-marks.local
+  # hostnames:
+  # - buried-marks.local
   rules:
   - matches:
     - path:

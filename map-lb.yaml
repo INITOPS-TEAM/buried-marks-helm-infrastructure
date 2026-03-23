@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: map-lb
+  name: map-lb
+  namespace: buried-marks
+spec:
+  ports:
+  - name: 80-9001
+    port: 80
+    protocol: TCP
+    targetPort: 9001
+  selector:
+    app.kubernetes.io/instance: map-service
+  type: LoadBalancer
+status:
+  loadBalancer: {}
