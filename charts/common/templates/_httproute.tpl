@@ -30,9 +30,15 @@ spec:
     - matches:
       {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with .filters }}
       filters:
-      {{- toYaml . | nindent 8 }}
+      {{- if .filters }}
+      {{- toYaml .filters | nindent 8 }}
+      {{- else }}
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
     {{- end }}
       backendRefs:
         - name: {{ $fullName }}
