@@ -1,0 +1,81 @@
+environments:
+  dev:
+    values:
+    - values/dev-values.yaml
+  stage:
+    values:
+    - values/stage-values.yaml
+  prod:
+    values:
+    - values/prod-values.yaml
+---
+
+repositories:
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+- name: external-secrets
+  url: https://charts.external-secrets.io
+
+releases:
+- name: gateway
+  chart: charts/gateway
+  namespace: buried-marks
+  condition: global.gateway.enabled
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: alb
+  chart: charts/alb
+  namespace: alb-ingress
+  createNamespace: true
+  condition: global.isEKS.enabled
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: auth-service
+  chart: charts/auth-service
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: mail-service
+  chart: charts/mail-service
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: map-service
+  chart: charts/map-service
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: voting-service
+  chart: charts/voting-service
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: login-front
+  chart: charts/login-front
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: map-front
+  chart: charts/map-front
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: voting-front
+  chart: charts/voting-front
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: admin-front
+  chart: charts/admin-front
+  namespace: buried-marks
+  values:
+  - values/{{ .Environment.Name }}-values.yaml

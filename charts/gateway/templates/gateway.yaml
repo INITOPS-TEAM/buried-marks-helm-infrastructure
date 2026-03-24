@@ -1,0 +1,8 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: buried-marks-gateway
+  namespace: {{ .Release.Namespace }}
+spec:
+  gatewayClassName: {{ .Values.gatewayClassName }}
+  listeners: {{- toYaml .Values.listeners | nindent 4 -}}

@@ -1,0 +1,14 @@
+apiVersion: v2
+name: mail-service
+description: Buried Marks mail microservice
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+dependencies:
+- name: valkey
+  version: "5.4.7"
+  repository: https://charts.bitnami.com/bitnami
+- name: common
+  version: "0.1.0"
+  repository: "file://../common"

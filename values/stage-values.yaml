@@ -1,23 +1,71 @@
-admin-front:
+global:
+  isEKS:
+    enabled: true
+  gateway:
+    enabled: false
+
+map-service:
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  httpRoute:
+    enabled: false
+
+auth-service:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  httpRoute:
+    enabled: false
+
+mail-service:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
 
+voting-service:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  httpRoute:
+    enabled: false
+
 login-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
     pullPolicy: IfNotPresent
     tag: "latest"
+  httpRoute:
+    enabled: false
 
 map-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
     pullPolicy: IfNotPresent
     tag: "latest"
+  httpRoute:
+    enabled: false
 
 voting-front:
+  replicaCount: 2
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
     pullPolicy: IfNotPresent
     tag: "latest"
+  httpRoute:
+    enabled: false
+
+admin-front:
+  replicaCount: 2
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  httpRoute:
+    enabled: false

@@ -1,0 +1,86 @@
+replicaCount: 1
+
+image:
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets:
+- name: ecr-secret
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+  runAsUser: 0
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 8900
+
+httpRoute:
+  enabled: true
+  annotations: {}
+  parentRefs:
+  - name: buried-marks-gateway
+    sectionName: http
+  # hostnames:
+  # - buried-marks.local
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/polls/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /docs
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /openapi.json
+
+resources: {}
+
+envSecret: voting-service-secret
+awsSecretName: buried-marks/voting-service
+
+livenessProbe: {}
+readinessProbe: {}
+
+volumes:
+- name: jwt-public-key
+  secret:
+    secretName: jwt-public-key
+    optional: false
+
+volumeMounts:
+- name: jwt-public-key
+  mountPath: "/tmp/jwt_public_key/ec_public.key"
+  subPath: ec_public.key
+  readOnly: false
+
+db:
+  host: voting-service-postgresql
+  port: 5432
+
+postgresql:
+  auth:
+    existingSecret: voting-service-secret
+    database: voting_db
+    username: admin
+  primary:
+    persistence:
+      enabled: false

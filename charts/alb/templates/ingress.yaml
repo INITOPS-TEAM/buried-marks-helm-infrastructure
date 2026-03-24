@@ -1,0 +1,139 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /api/login
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /api/token
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /api/update-password
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /api/emails
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /api/users
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /architect/send-email
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /invite
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /accept-invite
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.authService.name }}
+                port:
+                  number: {{ .Values.authService.port }}
+          - path: /api/markers
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.mapService.name }}
+                port:
+                  number: {{ .Values.mapService.port }}
+          - path: /api/categories
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.mapService.name }}
+                port:
+                  number: {{ .Values.mapService.port }}
+          - path: /map
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.mapFront.name }}
+                port:
+                  number: {{ .Values.mapFront.port }}
+          - path: /voting
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.votingFront.name }}
+                port:
+                  number: {{ .Values.votingFront.port }}
+          - path: /admin
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.adminFront.name }}
+                port:
+                  number: {{ .Values.adminFront.port }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.loginFront.name }}
+                port:
+                  number: {{ .Values.loginFront.port }}
+          - path: /register
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.loginFront.name }}
+                port:
+                  number: {{ .Values.loginFront.port }}
+          - path: /api/polls
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.votingService.name }}
+                port:
+                  number: {{ .Values.votingService.port }}
+          - path: /docs
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.votingService.name }}
+                port:
+                  number: {{ .Values.votingService.port }}
+          - path: /openapi.json
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.votingService.name }}
+                port:
+                  number: {{ .Values.votingService.port }}

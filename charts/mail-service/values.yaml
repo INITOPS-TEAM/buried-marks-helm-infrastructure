@@ -1,0 +1,52 @@
+replicaCount: 1
+
+image:
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets:
+- name: ecr-secret
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+# securityContext:
+#   allowPrivilegeEscalation: false
+#   readOnlyRootFilesystem: false
+#   runAsNonRoot: true
+#   runAsUser: 1000
+#   capabilities:
+#     drop:
+#       - ALL
+
+service:
+  type: ClusterIP
+  port: 8080
+
+httpRoute:
+  enabled: false
+
+resources: {}
+
+envSecret: mail-service-secret
+awsSecretName: buried-marks/mail-service
+
+livenessProbe: {}
+readinessProbe: {}
+
+db:
+  host: mail-service-valkey-primary
+  port: 6379
+
+valkey:
+  auth:
+    enabled: false
+  primary:
+    persistence:
+      enabled: false

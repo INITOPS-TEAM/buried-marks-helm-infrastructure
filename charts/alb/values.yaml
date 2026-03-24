@@ -1,0 +1,27 @@
+authService:
+  name: auth-service
+  port: 8000
+
+mapService:
+  name: map-service
+  port: 9001
+
+mapFront:
+  name: map-front
+  port: 8080
+
+votingFront:
+  name: voting-front
+  port: 8080
+
+adminFront:
+  name: admin-front
+  port: 8080
+
+loginFront:
+  name: login-front
+  port: 8080
+
+votingService:
+  name: voting-service
+  port: 8900

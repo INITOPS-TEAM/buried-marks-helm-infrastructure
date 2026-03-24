@@ -1,0 +1,87 @@
+replicaCount: 1
+
+image:
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets:
+- name: ecr-secret
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false # could conflict with Django
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 9001
+
+httpRoute:
+  enabled: true
+  annotations: {}
+  parentRefs:
+  - name: buried-marks-gateway
+    sectionName: http
+  hostnames:
+  - buried-marks.local
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/markers/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/categories/
+
+resources: {}
+
+envSecret: map-service-secret
+awsSecretName: buried-marks/auth-service
+
+readinessProbe:
+  httpGet:
+    path: /health/
+    port: 9001
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  failureThreshold: 10
+
+volumes:
+- name: jwt-public-key
+  secret:
+    secretName: jwt-public-key
+    optional: false
+
+volumeMounts:
+- name: jwt-public-key
+  mountPath: "/app/ec_public.key"
+  subPath: ec_public.key
+  readOnly: false
+
+db:
+  host: map-service-mariadb
+  port: 3306
+
+mariadb:
+  auth:
+    existingSecret: map-service-secret
+    database: buriedmarks
+    username: buriedmarks
+  primary:
+    persistence:
+      enabled: false

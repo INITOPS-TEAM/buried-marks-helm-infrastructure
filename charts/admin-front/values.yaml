@@ -5,7 +5,8 @@ image:
   pullPolicy: IfNotPresent
   tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+- name: ecr-secret
 
 serviceAccount:
   create: false
@@ -22,7 +23,7 @@ securityContext:
   runAsUser: 1000
   capabilities:
     drop:
-      - ALL
+    - ALL
 
 service:
   type: ClusterIP
@@ -32,15 +33,15 @@ httpRoute:
   enabled: true
   annotations: {}
   parentRefs:
-    - name: buried-marks-gateway
-      sectionName: http
+  - name: buried-marks-gateway
+    sectionName: http
   hostnames:
-    - buried-marks.local
+  - buried-marks.local
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /admin/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /admin/
 
 resources:
   requests:

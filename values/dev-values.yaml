@@ -1,23 +1,89 @@
-admin-front:
+global:
+  isEKS:
+    enabled: false
+  gateway:
+    enabled: true
+
+map-service:
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
-    pullPolicy: IfNotPresent
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+    pullPolicy: Never
     tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+  livenessProbe: {}
+  readinessProbe: {}
+  httpRoute:
+    enabled: true
+
+auth-service:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+  livenessProbe: {}
+  readinessProbe: {}
+  httpRoute:
+    enabled: true
+
+mail-service:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+  httpRoute:
+    enabled: true
+
+voting-service:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  securityContext: {}
+  podSecurityContext: {}
+  httpRoute:
+    enabled: true
 
 login-front:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
-    pullPolicy: IfNotPresent
+    pullPolicy: Never
     tag: "latest"
+  imagePullSecrets: []
+  httpRoute:
+    enabled: true
 
 map-front:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
-    pullPolicy: IfNotPresent
+    pullPolicy: Never
     tag: "latest"
+  imagePullSecrets: []
+  httpRoute:
+    enabled: true
 
 voting-front:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
-    pullPolicy: IfNotPresent
+    pullPolicy: Never
     tag: "latest"
+  imagePullSecrets: []
+  httpRoute:
+    enabled: true
+
+admin-front:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: []
+  httpRoute:
+    enabled: true

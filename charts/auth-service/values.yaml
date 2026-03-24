@@ -1,0 +1,127 @@
+replicaCount: 1
+
+image:
+  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets:
+- name: ecr-secret
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 8000
+
+httpRoute:
+  enabled: true
+  annotations: {}
+  parentRefs:
+  - name: buried-marks-gateway
+    sectionName: http
+  hostnames:
+  - buried-marks.local
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/login/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/token/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/update-password/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/emails/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/users/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /architect/send-email/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /invite/
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /accept-invite/
+
+resources: {}
+
+envSecret: auth-service-secret
+awsSecretName: buried-marks/auth-service
+
+# livenessProbe:
+#   # httpGet:
+#   #   path: /health/
+#   #   port: 8000
+#   # initialDelaySeconds: 30
+#   # periodSeconds: 10
+#   # failureThreshold: 10
+
+# readinessProbe:
+#   httpGet:
+#     path: /health/
+#     port: 8000
+#   initialDelaySeconds: 5
+#   periodSeconds: 10
+#   failureThreshold: 10
+
+volumes:
+- name: jwt-public-key
+  secret:
+    secretName: jwt-public-key
+    optional: false
+- name: jwt-private-key
+  secret:
+    secretName: jwt-private-key
+    optional: false
+
+volumeMounts:
+- name: jwt-public-key
+  mountPath: "/app/public.pem"
+  subPath: ec_public.key
+  readOnly: true
+- name: jwt-private-key
+  mountPath: "/app/private.pem"
+  subPath: ec_private.key
+  readOnly: true
+
+db:
+  host: auth-service-postgresql
+  port: 5432
+
+postgresql:
+  auth:
+    existingSecret: auth-service-secret
+    database: auth_db
+    username: db_admin
+  primary:
+    persistence:
+      enabled: false
