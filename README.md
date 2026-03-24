@@ -20,6 +20,7 @@ Helm charts for Buried Marks microservices deployment on Kubernetes.
 ├── helmfile.yaml          # Helmfile for simultaneously deploy all services at once
 ├── values
 │   ├── dev-values.yaml    # Local deployment overrides
+│   ├── stage-values.yaml  # Stage overrides
 │   └── prod-values.yaml   # Production overrides
 └── values.yaml            # Global default values
 ```
