@@ -1,5 +1,5 @@
 apiVersion: v2
-name: voting-front
+name: buried-marks-helm-voting-front
 description: Buried Marks voting-front microservice
 type: application
 version: 0.1.0
