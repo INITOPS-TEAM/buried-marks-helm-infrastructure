@@ -1,0 +1,136 @@
+kube-prometheus-stack:
+  prometheus:
+    enabled: true
+    prometheusSpec:
+      retention: 7d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+      ruleNamespaceSelectorNilUsesHelmValues: false
+      additionalScrapeConfigs:
+        # Job 1 HTTP checks for microservices
+        - job_name: 'kubernetes-services-http'
+          scrape_interval: 30s
+          scrape_timeout: 10s
+          metrics_path: /probe
+          params:
+            module: [http_2xx]
+          kubernetes_sd_configs:
+            - role: service
+              namespaces:
+                names:
+                  - buried-marks
+          relabel_configs:
+            - source_labels: [__meta_kubernetes_service_port_number]
+              regex: '^(8000|8080|8888|8900|9001)$'
+              action: keep
+            - source_labels: [__meta_kubernetes_service_name]
+              target_label: service
+            - source_labels: [__meta_kubernetes_namespace]
+              target_label: namespace
+            - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_namespace, __meta_kubernetes_service_port_number]
+              separator: ';'
+              regex: '(.*);(.*);(.*)'
+              target_label: __param_target
+              replacement: 'http://${1}.${2}:${3}'
+            - source_labels: [__meta_kubernetes_service_name]
+              target_label: instance
+            - target_label: __address__
+              replacement: monitoring-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+
+        # Job 2 /health/ endpoint checks
+        - job_name: 'kubernetes-services-health'
+          scrape_interval: 60s
+          scrape_timeout: 10s
+          metrics_path: /probe
+          params:
+            module: [http_2xx]
+          kubernetes_sd_configs:
+            - role: service
+              namespaces:
+                names:
+                  - buried-marks
+          relabel_configs:
+            - source_labels: [__meta_kubernetes_service_port_number]
+              regex: '^(9001)$'
+              action: keep
+            - source_labels: [__meta_kubernetes_service_name]
+              target_label: service
+            - source_labels: [__meta_kubernetes_namespace]
+              target_label: namespace
+            - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_namespace, __meta_kubernetes_service_port_number]
+              separator: ';'
+              regex: '(.*);(.*);(.*)'
+              target_label: __param_target
+              replacement: 'http://${1}.${2}:${3}/health/'
+            - source_labels: [__meta_kubernetes_service_name]
+              target_label: instance
+              replacement: '${1}-health'
+            - target_label: __address__
+              replacement: monitoring-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+
+  grafana:
+    enabled: true
+    adminPassword: "admin"
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        labelValue: "1"
+        searchNamespace: ALL
+    persistence:
+      enabled: true
+      size: 5Gi
+
+  alertmanager:
+    enabled: true
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 5Gi
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        receiver: "slack"
+      receivers:
+        - name: "slack"
+          slack_configs:
+            - api_url: "https://hooks.slack.com/services/XXX/XXX/XXX"
+              channel: "#alerts"
+              send_resolved: true
+
+prometheus-blackbox-exporter:
+  enabled: true
+  config:
+    modules:
+      http_2xx:
+        prober: http
+        timeout: 5s
+        http:
+          valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+          follow_redirects: true
+      tcp_connect:
+        prober: tcp
+        timeout: 5s
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  service:
+    type: ClusterIP
+    port: 9115
+  serviceMonitor:
+    enabled: true
+    interval: 30s
