@@ -24,13 +24,16 @@ releases:
   values:
   - values/{{ .Environment.Name }}-values.yaml
 
-- name: alb
-  chart: charts/alb
-  namespace: alb-ingress
+- name: aws-gateway-api-controller
+  chart: oci://public.ecr.aws/aws-controllers-k8s/aws-gateway-api-controller
+  namespace: aws-application-networking-system
   createNamespace: true
   condition: global.isEKS.enabled
-  values:
-  - values/{{ .Environment.Name }}-values.yaml
+  set:
+    - name: aws.region
+      value: eu-north-1
+    - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
+      value: arn:aws:iam::531331080468:role/aws-gateway-api-controller
 
 - name: auth-service
   chart: charts/auth-service

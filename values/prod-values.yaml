@@ -4,6 +4,10 @@ global:
   gateway:
     enabled: false
 
+gateway:
+  gatewayClassName: amazon-vpc-lattice
+  controllerName: ""
+
 map-service:
   image:
     repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
