@@ -57,6 +57,20 @@ kubectl port-forward -n monitoring svc/monitoring-kube-prometheus-alertmanager 9
 kubectl port-forward -n monitoring svc/monitoring-prometheus-blackbox-exporter 9115:9115
 ```
 
+## Environment Variables
+
+Used variables:
+
+- **GRAFANA_ADMIN_PASSWORD** – Grafana admin password
+- **SLACK_API_URL** – Slack webhook URL
+- **SLACK_CHANNEL** – Slack channel for alerts
+
+Examples:
+
+- **GRAFANA_ADMIN_PASSWORD** – admin
+- **SLACK_API_URL** – https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+- **SLACK_CHANNEL** – "#alerts"
+
 ## Slack Integration
 
 ### Configure Slack Webhook

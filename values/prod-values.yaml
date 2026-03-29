@@ -146,6 +146,6 @@ kube-prometheus-stack:
       receivers:
         - name: "slack"
           slack_configs:
-            - api_url: "https://hooks.slack.com/services/XXX/XXX/XXX"
-              channel: "#alerts-prod"
+            - api_url: ${SLACK_API_URL}
+              channel: ${SLACK_CHANNEL}
               send_resolved: true

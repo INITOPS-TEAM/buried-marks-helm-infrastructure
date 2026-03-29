@@ -75,7 +75,7 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
-    adminPassword: "admin"
+    adminPassword: ${GRAFANA_ADMIN_PASSWORD:-admin}
     sidecar:
       dashboards:
         enabled: true
@@ -104,8 +104,8 @@ kube-prometheus-stack:
       receivers:
         - name: "slack"
           slack_configs:
-            - api_url: "https://hooks.slack.com/services/XXX/XXX/XXX"
-              channel: "#alerts"
+            - api_url: ${SLACK_API_URL}
+              channel: ${SLACK_CHANNEL}
               send_resolved: true
 
 prometheus-blackbox-exporter:
