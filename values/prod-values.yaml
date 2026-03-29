@@ -121,20 +121,20 @@ admin-front:
 kube-prometheus-stack:
   prometheus:
     prometheusSpec:
-      retention: 15d              # Зберігаємо метрики мінімум 2 тижні
-      replicas: 2                 # High Availability: 2 поди Прометеуса
+      retention: 15d
+      replicas: 2
       resources:
         requests:
           memory: 2Gi
           cpu: 500m
         limits:
-          memory: 4Gi             # Прометеус може споживати багато пам'яті
+          memory: 4Gi
       storageSpec:
         volumeClaimTemplate:
           spec:
             resources:
               requests:
-                storage: 30Gi     # Більше місця для довгої історії метрик
+                storage: 30Gi
 
   grafana:
     persistence:
