@@ -117,3 +117,35 @@ admin-front:
     tag: "latest"
   httpRoute:
     enabled: false
+
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 15d              # Зберігаємо метрики мінімум 2 тижні
+      replicas: 2                 # High Availability: 2 поди Прометеуса
+      resources:
+        requests:
+          memory: 2Gi
+          cpu: 500m
+        limits:
+          memory: 4Gi             # Прометеус може споживати багато пам'яті
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 30Gi     # Більше місця для довгої історії метрик
+
+  grafana:
+    persistence:
+      size: 10Gi
+
+  alertmanager:
+    enabled: true
+    config:
+      receivers:
+        - name: "slack"
+          slack_configs:
+            - api_url: "https://hooks.slack.com/services/XXX/XXX/XXX"
+              channel: "#alerts-prod"
+              send_resolved: true

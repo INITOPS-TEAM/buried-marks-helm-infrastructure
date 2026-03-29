@@ -73,3 +73,24 @@ admin-front:
     tag: "latest"
   httpRoute:
     enabled: false
+
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 7d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 10Gi
+
+  alertmanager:
+    enabled: true
+    config:
+      receivers:
+        - name: "slack"
+          slack_configs:
+            - api_url: "https://hooks.slack.com/services/XXX/XXX/XXX"
+              channel: "#alerts-stage"
+              send_resolved: true
