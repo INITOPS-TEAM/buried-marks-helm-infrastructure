@@ -1,12 +1,12 @@
 replicaCount: 1
 
 image:
-  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
   pullPolicy: IfNotPresent
   tag: "latest"
 
-imagePullSecrets:
-- name: ecr-secret
+imagePullSecrets: []
+# - name: ecr-secret
 
 serviceAccount:
   create: false
@@ -36,8 +36,8 @@ httpRoute:
   parentRefs:
   - name: buried-marks-gateway
     sectionName: http
-  hostnames:
-  - buried-marks.local
+  # hostnames:
+  # - buried-marks.local
   rules:
   - matches:
     - path:
