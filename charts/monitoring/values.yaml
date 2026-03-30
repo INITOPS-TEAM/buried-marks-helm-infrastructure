@@ -1,3 +1,6 @@
+envSecret: monitoring-secrets
+awsSecretName: buried-marks/monitoring
+
 kube-prometheus-stack:
   prometheus:
     enabled: true
@@ -75,7 +78,7 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
-    adminPassword: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    adminPassword: ${GRAFANA_ADMIN_PASSWORD}
     sidecar:
       dashboards:
         enabled: true
