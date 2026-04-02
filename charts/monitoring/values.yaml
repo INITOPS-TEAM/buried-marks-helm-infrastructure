@@ -1,6 +1,13 @@
 envSecret: monitoring-secrets
 awsSecretName: buried-marks/monitoring
 
+global:
+  aws:
+    region: eu-north-1
+  secrets:
+    monitoring: buried-marks/monitoring
+    buried-marks-helm-monitoring: buried-marks/monitoring
+
 kube-prometheus-stack:
   prometheus:
     enabled: true
@@ -9,6 +16,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
+            storageClassName: gp2-ebs
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
@@ -78,7 +86,10 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
-    adminPassword: ${GRAFANA_ADMIN_PASSWORD}
+    admin:
+      existingSecret: monitoring-secrets
+      userKey: GRAFANA_ADMIN_USER
+      passwordKey: GRAFANA_ADMIN_PASSWORD
     sidecar:
       dashboards:
         enabled: true
@@ -87,6 +98,7 @@ kube-prometheus-stack:
         searchNamespace: ALL
     persistence:
       enabled: true
+      storageClassName: gp2-ebs
       size: 5Gi
 
   alertmanager:
@@ -95,6 +107,7 @@ kube-prometheus-stack:
       storage:
         volumeClaimTemplate:
           spec:
+            storageClassName: gp2-ebs
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
