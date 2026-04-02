@@ -1,4 +1,6 @@
 global:
+  domain: marks.dev.birds.pp.ua
+  env: dev
   isEKS:
     enabled: false
   gateway:

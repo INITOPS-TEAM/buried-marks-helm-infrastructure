@@ -1,13 +1,19 @@
 environments:
   dev:
     values:
-    - values/dev-values.yaml
+      - env: dev
+        domain: marks.dev.birds.pp.ua
+        baseDomain: birds.pp.ua
   stage:
     values:
-    - values/stage-values.yaml
+      - env: stage
+        domain: marks.stage.command-line.top
+        baseDomain: command-line.top
   prod:
     values:
-    - values/prod-values.yaml
+      - env: prod
+        domain: marks.command-line.top
+        baseDomain: command-line.top
 ---
 
 repositories:

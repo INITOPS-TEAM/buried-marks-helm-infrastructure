@@ -1,4 +1,6 @@
 global:
+  domain: marks.command-line.top
+  env: prod
   isEKS:
     enabled: true
   gateway:
