@@ -1,0 +1,59 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches:
+    - main
+  release:
+    types:
+    - published
+
+permissions:
+  id-token: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    strategy:
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: arn:aws:iam::531331080468:role/github-service
+        aws-region: eu-north-1
+
+    - name: Login to ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2.1.0
+
+    - name: Helm Setup
+      uses: azure/setup-helm@v5.0.0
+      with:
+        version: 'v5.0.0'
+      id: install
+
+    - name: Build and push
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ github.event.repository.name }}
+        IMAGE_TAG: ${{ github.event_name == 'release' && github.ref_name || github.sha }}
+      run: |
+                helm package charts/${{helm_service.name}}
+                helm package charts/${{helm_service.name}}
+                helm package charts/${{helm_service.name}}
+        
+                            helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                                      helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                                      helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
+                  
