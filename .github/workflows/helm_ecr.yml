@@ -62,36 +62,36 @@ jobs:
 
     - name: Build and push
       run: |
-      
-      helm package charts/auth-service
-      
-      helm package charts/mail-service
-      
-      helm package charts/map-service
-      
+        
+        helm package charts/auth-service
+        
+        helm package charts/mail-service
+        
+        helm package charts/map-service
+        
 
-      
-      
-      helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      
-      
-      helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      
-      
-      helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
-      
-      
+        
+        
+        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
