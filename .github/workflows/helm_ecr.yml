@@ -59,13 +59,14 @@ jobs:
 
     - name: Build and push
       run: |
-        helm repo add bitnami https://charts.bitnami.com/bitnami
-        helm repo add external-secrets https://charts.external-secrets.io
         
+        helm dependency update charts/auth-service
         helm package charts/auth-service
         
+        helm dependency update charts/mail-service
         helm package charts/mail-service
         
+        helm dependency update charts/map-service
         helm package charts/map-service
         
 
