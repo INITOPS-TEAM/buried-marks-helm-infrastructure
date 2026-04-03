@@ -5,4 +5,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   gatewayClassName: {{ .Values.gatewayClassName }}
-  listeners: {{- toYaml .Values.listeners | nindent 4 -}}
+  listeners:
+  {{- range .Values.listeners }}
+  - name: {{ .name }}
+    port: {{ .port }}
+    protocol: {{ .protocol }}
+    allowedRoutes:
+      namespaces:
+        from: Same
+  {{- end }}

@@ -1,11 +1,14 @@
-gatewayClassName: envoy
-
+gatewayClassName: aws-envoy
 namespace: buried-marks
+controllerName: gateway.envoyproxy.io/gatewayclass-controller
+
+aws:
+  certificateArn: ""
 
 listeners:
-- name: http
-  # port: 80
-  port: 8888
-  protocol: HTTP
-
-controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  - name: http
+    port: 80
+    protocol: HTTP
+  - name: https
+    port: 443
+    protocol: HTTP

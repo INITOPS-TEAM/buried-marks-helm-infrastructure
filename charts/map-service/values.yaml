@@ -35,7 +35,7 @@ httpRoute:
   annotations: {}
   parentRefs:
   - name: buried-marks-gateway
-    sectionName: http
+    sectionName: https
   # hostnames:
   # - buried-marks.local
   rules:
