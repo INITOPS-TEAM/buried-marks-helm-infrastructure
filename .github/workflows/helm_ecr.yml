@@ -72,26 +72,26 @@ jobs:
 
         
         
-        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-authentication-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
         
-        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-authentication-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
         
-        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
-        
-        
-        
-        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-        
-        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
-        
-        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-authentication-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
         
         
         
-        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-mail-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
         
-        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-mail-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
         
-        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-mail-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-map-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-map-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -d 1 -name "buried-marks-helm-map-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
         
         
