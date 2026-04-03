@@ -1,3 +1,6 @@
+# Managed by Terraform in https://github.com/INITOPS-TEAM/buried-marks-terraform.
+# All changes would be discarded after `terraform apply` in buried-marks-terraform repository.
+
 name: Build and Push to ECR
 
 on:
@@ -15,21 +18,41 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
-    strategy:
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v6
 
+    
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v6
       with:
-        role-to-assume: arn:aws:iam::531331080468:role/github-service
+        role-to-assume: arn:aws:iam::995303881249:role/github-service
         aws-region: eu-north-1
 
     - name: Login to ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2.1.0
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: arn:aws:iam::492052863680:role/github-service
+        aws-region: eu-north-1
+
+    - name: Login to ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2.1.0
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: arn:aws:iam::833822972731:role/github-service
+        aws-region: eu-north-1
+
+    - name: Login to ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2.1.0
+    
 
     - name: Helm Setup
       uses: azure/setup-helm@v5.0.0
@@ -38,10 +61,6 @@ jobs:
       id: install
 
     - name: Build and push
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ github.event.repository.name }}
-        IMAGE_TAG: ${{ github.event_name == 'release' && github.ref_name || github.sha }}
       run: |
       
       helm package charts/auth-service
