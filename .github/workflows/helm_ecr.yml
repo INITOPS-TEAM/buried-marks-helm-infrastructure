@@ -54,7 +54,7 @@ jobs:
     - name: Helm Setup
       uses: azure/setup-helm@v5.0.0
       with:
-        version: 'v5.0.0'
+        version: '4.1.1'
       id: install
 
     - name: Build and push
