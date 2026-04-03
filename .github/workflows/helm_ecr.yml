@@ -43,17 +43,36 @@ jobs:
         ECR_REPOSITORY: ${{ github.event.repository.name }}
         IMAGE_TAG: ${{ github.event_name == 'release' && github.ref_name || github.sha }}
       run: |
-                helm package charts/${{helm_service.name}}
-                helm package charts/${{helm_service.name}}
-                helm package charts/${{helm_service.name}}
-        
-                            helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                                      helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                                      helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                    helm push buried-marks-helm-${{helm_service.chart_name}}-0.1.0.tgz oci://${{aws_env}}.dkr.ecr.eu-north-1.amazonaws.com/
-                  
+      
+      helm package charts/auth-service
+      
+      helm package charts/mail-service
+      
+      helm package charts/map-service
+      
+
+      
+      
+      helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      
+      
+      helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      
+      
+      helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+      
+      
