@@ -26,21 +26,19 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v6
       with:
-        role-to-assume: arn:aws:iam::995303881249:role/github-service
+        role-to-assume: arn:aws:iam::492052863680:role/github-service
         aws-region: eu-north-1
 
     - name: Login to ECR
-      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2.1.0
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v6
       with:
-        role-to-assume: arn:aws:iam::492052863680:role/github-service
+        role-to-assume: arn:aws:iam::995303881249:role/github-service
         aws-region: eu-north-1
 
     - name: Login to ECR
-      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2.1.0
     
     - name: Configure AWS credentials
@@ -50,7 +48,6 @@ jobs:
         aws-region: eu-north-1
 
     - name: Login to ECR
-      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2.1.0
     
 
@@ -72,25 +69,25 @@ jobs:
 
         
         
-        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-        
         helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
         
         helm push buried-marks-helm-authentication-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
         
         
         
-        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-        
         helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
         
         helm push buried-marks-helm-mail-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
         
         
         
-        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
-        
         helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
         
         helm push buried-marks-helm-map-microservice-0.1.0.tgz oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
         
