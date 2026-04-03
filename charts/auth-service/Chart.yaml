@@ -1,8 +1,8 @@
 apiVersion: v2
-name: auth-service
+name: buried-marks-helm-authentication-microservice
 description: Buried Marks authentication microservice
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest"
 
 dependencies:

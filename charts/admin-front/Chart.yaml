@@ -1,8 +1,8 @@
 apiVersion: v2
-name: admin-front
+name: buried-marks-helm-admin-front
 description: Buried Marks admin-front microservice
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest"
 
 dependencies:

@@ -18,3 +18,5 @@ tmp/
 data/
 .env.*
 !.env.*.example
+
+*-supertesting.yaml

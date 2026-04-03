@@ -4,3 +4,8 @@ metadata:
   name: {{ .Values.gatewayClassName }}
 spec:
   controllerName: {{ .Values.controllerName }}
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: aws-proxy-config
+    namespace: {{ .Release.Namespace }}
