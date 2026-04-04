@@ -30,6 +30,14 @@ helm install monitoring ./charts/monitoring \
 
 ## Accessing Services
 
+## Update config
+
+To connect to the cluster, update `kubeconfig`:
+
+```bash
+aws eks update-kubeconfig --region eu-north-1 --name birdmarks-eks-prod
+```
+
 ### Prometheus
 
 ```bash

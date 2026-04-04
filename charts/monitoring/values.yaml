@@ -86,6 +86,8 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
+    strategy:
+      type: Recreate
     admin:
       existingSecret: monitoring-secrets
       userKey: GRAFANA_ADMIN_USER
