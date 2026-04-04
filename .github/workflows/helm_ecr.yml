@@ -1,0 +1,163 @@
+# Managed by Terraform in https://github.com/INITOPS-TEAM/buried-marks-terraform.
+# All changes would be discarded after `terraform apply` in buried-marks-terraform repository.
+
+name: Build and Push to ECR
+
+on:
+  push:
+    branches:
+    - main
+  release:
+    types:
+    - published
+
+permissions:
+  id-token: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: arn:aws:iam::995303881249:role/github-service
+        aws-region: eu-north-1
+
+    - name: Login to ECR
+      uses: aws-actions/amazon-ecr-login@v2.1.0
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: arn:aws:iam::492052863680:role/github-service
+        aws-region: eu-north-1
+
+    - name: Login to ECR
+      uses: aws-actions/amazon-ecr-login@v2.1.0
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: arn:aws:iam::833822972731:role/github-service
+        aws-region: eu-north-1
+
+    - name: Login to ECR
+      uses: aws-actions/amazon-ecr-login@v2.1.0
+    
+
+    - name: Helm Setup
+      uses: azure/setup-helm@v5.0.0
+      with:
+        version: '4.1.1'
+      id: install
+
+    - name: Build and push
+      run: |
+        
+        helm dependency update charts/admin-front
+        helm package charts/admin-front
+        
+        helm dependency update charts/auth-service
+        helm package charts/auth-service
+        
+        helm dependency update charts/gateway
+        helm package charts/gateway
+        
+        helm dependency update charts/login-front
+        helm package charts/login-front
+        
+        helm dependency update charts/mail-service
+        helm package charts/mail-service
+        
+        helm dependency update charts/map-front
+        helm package charts/map-front
+        
+        helm dependency update charts/map-service
+        helm package charts/map-service
+        
+        helm dependency update charts/voting-front
+        helm package charts/voting-front
+        
+        helm dependency update charts/voting-service
+        helm package charts/voting-service
+        
+
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-admin-front-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-admin-front-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-admin-front-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-authentication-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-authentication-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-authentication-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-gateway-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-gateway-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-gateway-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-login-front-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-login-front-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-login-front-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-mail-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-mail-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-mail-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-map-front-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-map-front-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-map-front-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-map-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-map-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-map-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-voting-front-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-voting-front-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-voting-front-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-voting-microservice-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-voting-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-voting-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        

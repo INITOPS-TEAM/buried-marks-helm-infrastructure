@@ -1,12 +1,12 @@
 replicaCount: 1
 
 image:
-  repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
+  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
   pullPolicy: IfNotPresent
   tag: "latest"
 
-imagePullSecrets:
-- name: ecr-secret
+imagePullSecrets: []
+# - name: ecr-secret
 
 serviceAccount:
   create: false
@@ -34,9 +34,9 @@ httpRoute:
   annotations: {}
   parentRefs:
   - name: buried-marks-gateway
-    sectionName: http
-  hostnames:
-  - buried-marks.local
+    sectionName: https
+  # hostnames:
+  # - buried-marks.local
   rules:
   - matches:
     - path:
