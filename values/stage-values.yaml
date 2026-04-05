@@ -1,8 +1,13 @@
 global:
+  domain: marks.stage.command-line.top
+  env: stage
   isEKS:
     enabled: true
   gateway:
     enabled: false
+
+elb:
+  certificateArn: "arn:aws:acm:eu-north-1:492052863680:certificate/e1eefdab-e668-4d1d-9649-d53a68fff7c4"
 
 gateway:
   gatewayClassName: amazon-vpc-lattice
@@ -73,3 +78,24 @@ admin-front:
     tag: "latest"
   httpRoute:
     enabled: false
+
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 7d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 10Gi
+
+  alertmanager:
+    enabled: true
+    config:
+      receivers:
+        - name: "slack"
+          slack_configs:
+            - api_url: ${SLACK_API_URL}
+              channel: ${SLACK_CHANNEL}
+              send_resolved: true

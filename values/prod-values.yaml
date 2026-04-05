@@ -1,4 +1,6 @@
 global:
+  domain: marks.command-line.top
+  env: prod
   isEKS:
     enabled: true
   gateway:
@@ -117,3 +119,35 @@ admin-front:
     tag: "latest"
   httpRoute:
     enabled: false
+
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 15d
+      replicas: 2
+      resources:
+        requests:
+          memory: 2Gi
+          cpu: 500m
+        limits:
+          memory: 4Gi
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 30Gi
+
+  grafana:
+    persistence:
+      size: 10Gi
+
+  alertmanager:
+    enabled: true
+    config:
+      receivers:
+        - name: "slack"
+          slack_configs:
+            - api_url: ${SLACK_API_URL}
+              channel: ${SLACK_CHANNEL}
+              send_resolved: true
