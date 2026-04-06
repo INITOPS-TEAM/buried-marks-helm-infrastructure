@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
   pullPolicy: IfNotPresent
   tag: "latest"
 

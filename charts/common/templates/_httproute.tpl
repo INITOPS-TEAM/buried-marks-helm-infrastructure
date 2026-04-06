@@ -33,7 +33,7 @@ spec:
       filters:
       {{- if .filters }}
       {{- toYaml .filters | nindent 8 }}
-      {{- else }}
+      {{- else if contains "-front" $fullName }}
       - type: URLRewrite
         urlRewrite:
           path:

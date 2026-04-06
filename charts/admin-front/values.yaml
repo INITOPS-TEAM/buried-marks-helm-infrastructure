@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -35,8 +35,8 @@ httpRoute:
   parentRefs:
   - name: buried-marks-gateway
     sectionName: https
-  hostnames:
-  - buried-marks.local
+  # hostnames:
+  # - buried-marks.local
   rules:
   - matches:
     - path:

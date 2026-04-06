@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -61,3 +61,7 @@ readinessProbe:
     port: 8080
   initialDelaySeconds: 5
   periodSeconds: 10
+
+global:
+  secrets:
+    buried-marks-helm-map-front: "buried-marks/map-service"
