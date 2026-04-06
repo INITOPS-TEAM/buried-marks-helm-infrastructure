@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -85,3 +85,10 @@ mariadb:
   primary:
     persistence:
       enabled: false
+
+global:
+  aws:
+    region: eu-north-1
+  secrets:
+    map-service: buried-marks/map-service
+    buried-marks-helm-map-microservice: buried-marks/map-service

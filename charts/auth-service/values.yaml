@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -36,8 +36,8 @@ httpRoute:
   parentRefs:
   - name: buried-marks-gateway
     sectionName: https
-  hostnames:
-  - buried-marks.local
+  # hostnames:
+  # - buried-marks.local
   rules:
   - matches:
     - path:
@@ -125,3 +125,10 @@ postgresql:
   primary:
     persistence:
       enabled: false
+
+global:
+  aws:
+    region: eu-north-1
+  secrets:
+    auth-service: buried-marks/auth-service
+    buried-marks-helm-authentication-microservice: buried-marks/auth-service
