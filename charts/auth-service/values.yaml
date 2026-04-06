@@ -96,21 +96,25 @@ awsSecretName: buried-marks/auth-service
 volumes:
 - name: jwt-public-key
   secret:
-    secretName: jwt-public-key
-    optional: false
+    secretName: auth-service-secret
+    items:
+      - key: JWT_PUBLIC_KEY
+        path: public.pem
 - name: jwt-private-key
   secret:
-    secretName: jwt-private-key
-    optional: false
+    secretName: auth-service-secret
+    items:
+      - key: JWT_PRIVATE_KEY
+        path: private.pem
 
 volumeMounts:
 - name: jwt-public-key
   mountPath: "/app/public.pem"
-  subPath: ec_public.key
+  subPath: public.pem
   readOnly: true
 - name: jwt-private-key
   mountPath: "/app/private.pem"
-  subPath: ec_private.key
+  subPath: private.pem
   readOnly: true
 
 db:

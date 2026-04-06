@@ -63,14 +63,26 @@ readinessProbe: {}
 volumes:
 - name: jwt-public-key
   secret:
-    secretName: jwt-public-key
-    optional: false
+    secretName: voting-service-secret
+    items:
+      - key: JWT_PUBLIC_KEY
+        path: public.pem
+- name: jwt-private-key
+  secret:
+    secretName: voting-service-secret
+    items:
+      - key: JWT_PRIVATE_KEY
+        path: private.pem
 
 volumeMounts:
 - name: jwt-public-key
   mountPath: "/tmp/jwt_public_key/ec_public.key"
-  subPath: ec_public.key
-  readOnly: false
+  subPath: public.pem
+  readOnly: true
+- name: jwt-private-key
+  mountPath: "/tmp/jwt_private_key/ec_private.key"
+  subPath: private.pem
+  readOnly: true
 
 db:
   host: voting-service-postgresql
