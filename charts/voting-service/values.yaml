@@ -9,10 +9,9 @@ imagePullSecrets: []
 # - name: ecr-secret
 
 serviceAccount:
-  create: false
-  automount: false
-  annotations: {}
-  name: ""
+  create: true
+  # Exact name is needed for EKS Pod Identity Association for RDS
+  name: "voting-service"
 
 podSecurityContext:
   fsGroup: 2000
@@ -65,14 +64,14 @@ volumes:
   secret:
     secretName: voting-service-secret
     items:
-      - key: JWT_PUBLIC_KEY
-        path: public.pem
+    - key: JWT_PUBLIC_KEY
+      path: public.pem
 - name: jwt-private-key
   secret:
     secretName: voting-service-secret
     items:
-      - key: JWT_PRIVATE_KEY
-        path: private.pem
+    - key: JWT_PRIVATE_KEY
+      path: private.pem
 
 volumeMounts:
 - name: jwt-public-key
