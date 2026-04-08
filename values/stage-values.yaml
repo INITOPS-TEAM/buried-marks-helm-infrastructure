@@ -1,10 +1,17 @@
 global:
+  aws:
+    region: eu-north-1
   domain: marks.stage.command-line.top
   env: stage
   isEKS:
     enabled: true
   gateway:
     enabled: false
+  secrets:
+    buried-marks-helm-authentication-microservice: "auth-service"
+    buried-marks-helm-map-microservice: "map-service"
+    buried-marks-helm-voting-microservice: "voting-service"
+    buried-marks-helm-mail-microservice: "mail-service"
 
 elb:
   certificateArn: "arn:aws:acm:eu-north-1:492052863680:certificate/e1eefdab-e668-4d1d-9649-d53a68fff7c4"

@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -63,14 +63,26 @@ readinessProbe: {}
 volumes:
 - name: jwt-public-key
   secret:
-    secretName: jwt-public-key
-    optional: false
+    secretName: voting-service-secret
+    items:
+      - key: JWT_PUBLIC_KEY
+        path: public.pem
+- name: jwt-private-key
+  secret:
+    secretName: voting-service-secret
+    items:
+      - key: JWT_PRIVATE_KEY
+        path: private.pem
 
 volumeMounts:
 - name: jwt-public-key
   mountPath: "/tmp/jwt_public_key/ec_public.key"
-  subPath: ec_public.key
-  readOnly: false
+  subPath: public.pem
+  readOnly: true
+- name: jwt-private-key
+  mountPath: "/tmp/jwt_private_key/ec_private.key"
+  subPath: private.pem
+  readOnly: true
 
 db:
   host: voting-service-postgresql
@@ -84,3 +96,10 @@ postgresql:
   primary:
     persistence:
       enabled: false
+
+global:
+  aws:
+    region: eu-north-1
+  secrets:
+    voting-service: buried-marks/voting-service
+    buried-marks-helm-voting-microservice: buried-marks/voting-service

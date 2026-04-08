@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -51,7 +51,7 @@ httpRoute:
 resources: {}
 
 envSecret: map-service-secret
-awsSecretName: buried-marks/auth-service
+awsSecretName: buried-marks/map-service
 
 readinessProbe:
   httpGet:
@@ -64,14 +64,26 @@ readinessProbe:
 volumes:
 - name: jwt-public-key
   secret:
-    secretName: jwt-public-key
-    optional: false
+    secretName: map-service-secret
+    items:
+      - key: JWT_PUBLIC_KEY
+        path: ec_public.key
+- name: jwt-private-key
+  secret:
+    secretName: map-service-secret
+    items:
+      - key: JWT_PRIVATE_KEY
+        path: ec_private.key
 
 volumeMounts:
 - name: jwt-public-key
   mountPath: "/app/ec_public.key"
   subPath: ec_public.key
-  readOnly: false
+  readOnly: true
+- name: jwt-private-key
+  mountPath: "/app/ec_private.key"
+  subPath: ec_private.key
+  readOnly: true
 
 db:
   host: map-service-mariadb
@@ -85,3 +97,10 @@ mariadb:
   primary:
     persistence:
       enabled: false
+
+global:
+  aws:
+    region: eu-north-1
+  secrets:
+    map-service: buried-marks/map-service
+    buried-marks-helm-map-microservice: buried-marks/map-service
