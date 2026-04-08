@@ -9,17 +9,16 @@ imagePullSecrets: []
 # - name: ecr-secret
 
 serviceAccount:
-  create: false
-  automount: false
-  annotations: {}
-  name: ""
+  create: true
+  # Exact name is needed for EKS Pod Identity Association for RDS
+  name: "map-service"
 
 podSecurityContext:
   fsGroup: 2000
 
 securityContext:
   allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: false # could conflict with Django
+  readOnlyRootFilesystem: false
   runAsNonRoot: true
   runAsUser: 1000
   capabilities:
@@ -66,24 +65,24 @@ volumes:
   secret:
     secretName: map-service-secret
     items:
-      - key: JWT_PUBLIC_KEY
-        path: ec_public.key
-- name: jwt-private-key
-  secret:
-    secretName: map-service-secret
-    items:
-      - key: JWT_PRIVATE_KEY
-        path: ec_private.key
+    - key: JWT_PUBLIC_KEY
+      path: ec_public.key
+# - name: jwt-private-key
+#   secret:
+#     secretName: map-service-secret
+#     items:
+#       - key: JWT_PRIVATE_KEY
+#         path: ec_private.key
 
 volumeMounts:
 - name: jwt-public-key
   mountPath: "/app/ec_public.key"
   subPath: ec_public.key
   readOnly: true
-- name: jwt-private-key
-  mountPath: "/app/ec_private.key"
-  subPath: ec_private.key
-  readOnly: true
+# - name: jwt-private-key
+#   mountPath: "/app/ec_private.key"
+#   subPath: ec_private.key
+#   readOnly: true
 
 db:
   host: map-service-mariadb
