@@ -9,10 +9,9 @@ imagePullSecrets: []
 # - name: ecr-secret
 
 serviceAccount:
-  create: false
-  automount: false
-  annotations: {}
-  name: ""
+  create: true
+  # Exact name is needed for EKS Pod Identity Association for RDS
+  name: "auth-service"
 
 podSecurityContext:
   fsGroup: 2000
@@ -77,35 +76,19 @@ resources: {}
 envSecret: auth-service-secret
 awsSecretName: buried-marks/auth-service
 
-# livenessProbe:
-#   # httpGet:
-#   #   path: /health/
-#   #   port: 8000
-#   # initialDelaySeconds: 30
-#   # periodSeconds: 10
-#   # failureThreshold: 10
-
-# readinessProbe:
-#   httpGet:
-#     path: /health/
-#     port: 8000
-#   initialDelaySeconds: 5
-#   periodSeconds: 10
-#   failureThreshold: 10
-
 volumes:
 - name: jwt-public-key
   secret:
     secretName: auth-service-secret
     items:
-      - key: JWT_PUBLIC_KEY
-        path: public.pem
+    - key: JWT_PUBLIC_KEY
+      path: public.pem
 - name: jwt-private-key
   secret:
     secretName: auth-service-secret
     items:
-      - key: JWT_PRIVATE_KEY
-        path: private.pem
+    - key: JWT_PRIVATE_KEY
+      path: private.pem
 
 volumeMounts:
 - name: jwt-public-key
@@ -121,14 +104,14 @@ db:
   host: auth-service-postgresql
   port: 5432
 
-postgresql:
-  auth:
-    existingSecret: auth-service-secret
-    database: auth_db
-    username: db_admin
-  primary:
-    persistence:
-      enabled: false
+# postgresql:
+#   auth:
+#     existingSecret: auth-service-secret
+#     database: auth_db
+#     username: db_admin
+#   primary:
+#     persistence:
+#       enabled: false
 
 global:
   aws:
