@@ -141,16 +141,16 @@ kube-prometheus-stack:
           cpu: 500m
         limits:
           memory: 4Gi
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            resources:
-              requests:
-                storage: 30Gi
+      # storageSpec:
+      #   volumeClaimTemplate:
+      #     spec:
+      #       resources:
+      #         requests:
+      #           storage: 30Gi
 
   grafana:
-    persistence:
-      size: 10Gi
+    # persistence:
+    #   size: 10Gi
 
   alertmanager:
     enabled: true
