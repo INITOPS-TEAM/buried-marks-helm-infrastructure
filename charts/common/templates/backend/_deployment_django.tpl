@@ -67,6 +67,8 @@ spec:
             - secretRef:
                 name: {{ .Values.envSecret }}
           env:
+            - name: DB_HOST
+              value: {{ .Values.db.host }}
             - name: POD_IP
               valueFrom:
                 fieldRef:
