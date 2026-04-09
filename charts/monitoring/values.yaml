@@ -13,18 +13,18 @@ kube-prometheus-stack:
     enabled: true
     prometheusSpec:
       retention: 7d
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: gp2-ebs
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 10Gi
+      # storageSpec:
+      #   volumeClaimTemplate:
+      #     spec:
+      #       storageClassName: gp2-ebs
+      #       accessModes: ["ReadWriteOnce"]
+      #       resources:
+      #         requests:
+      #           storage: 10Gi
       ruleNamespaceSelectorNilUsesHelmValues: false
       additionalScrapeConfigs:
-        # Job 1 HTTP checks for microservices
-        - job_name: 'kubernetes-services-http'
+        # Backend services check
+        - job_name: 'kubernetes-backend-services'
           scrape_interval: 30s
           scrape_timeout: 10s
           metrics_path: /probe
@@ -36,26 +36,46 @@ kube-prometheus-stack:
                 names:
                   - buried-marks
           relabel_configs:
-            - source_labels: [__meta_kubernetes_service_port_number]
-              regex: '^(8000|8080|8888|8900|9001)$'
+            - source_labels: [__meta_kubernetes_service_name]
+              regex: '.*-microservice$'
               action: keep
+            - source_labels: [__meta_kubernetes_service_name]
+              target_label: __tmp_path
+              replacement: '/admin/'
+            - source_labels: [__meta_kubernetes_service_name]
+              regex: 'map-microservice'
+              target_label: __tmp_path
+              replacement: '/health/'
+            - source_labels: [__meta_kubernetes_service_name]
+              regex: 'voting-microservice'
+              target_label: __tmp_path
+              replacement: '/healthcheck'
+            - source_labels: [__meta_kubernetes_service_name]
+              regex: 'mail-microservice'
+              target_label: __tmp_path
+              replacement: '/api/send-invite'
+            - source_labels: [__meta_kubernetes_service_name]
+              regex: 'mail-microservice'
+              target_label: __param_module
+              replacement: 'http_405_ok'
+            - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_namespace, __meta_kubernetes_service_port_number, __tmp_path]
+              separator: ';'
+              regex: '(.*);(.*);(.*);(.*)'
+              target_label: __param_target
+              replacement: 'http://${1}.${2}.svc.cluster.local:${3}${4}'
+
             - source_labels: [__meta_kubernetes_service_name]
               target_label: service
             - source_labels: [__meta_kubernetes_namespace]
               target_label: namespace
-            - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_namespace, __meta_kubernetes_service_port_number]
-              separator: ';'
-              regex: '(.*);(.*);(.*)'
-              target_label: __param_target
-              replacement: 'http://${1}.${2}:${3}'
             - source_labels: [__meta_kubernetes_service_name]
               target_label: instance
             - target_label: __address__
               replacement: monitoring-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
 
-        # Job 2 /health/ endpoint checks
-        - job_name: 'kubernetes-services-health'
-          scrape_interval: 60s
+        # Frontend services check
+        - job_name: 'kubernetes-frontend-services'
+          scrape_interval: 30s
           scrape_timeout: 10s
           metrics_path: /probe
           params:
@@ -66,8 +86,8 @@ kube-prometheus-stack:
                 names:
                   - buried-marks
           relabel_configs:
-            - source_labels: [__meta_kubernetes_service_port_number]
-              regex: '^(9001)$'
+            - source_labels: [__meta_kubernetes_service_name]
+              regex: '.*-front$'
               action: keep
             - source_labels: [__meta_kubernetes_service_name]
               target_label: service
@@ -77,10 +97,9 @@ kube-prometheus-stack:
               separator: ';'
               regex: '(.*);(.*);(.*)'
               target_label: __param_target
-              replacement: 'http://${1}.${2}:${3}/health/'
+              replacement: 'http://${1}.${2}.svc.cluster.local:${3}/'
             - source_labels: [__meta_kubernetes_service_name]
               target_label: instance
-              replacement: '${1}-health'
             - target_label: __address__
               replacement: monitoring-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
 
@@ -98,22 +117,22 @@ kube-prometheus-stack:
         label: grafana_dashboard
         labelValue: "1"
         searchNamespace: ALL
-    persistence:
-      enabled: true
-      storageClassName: gp2-ebs
-      size: 5Gi
+    # persistence:
+    #   enabled: true
+    #   storageClassName: gp2-ebs
+    #   size: 5Gi
 
   alertmanager:
     enabled: true
-    alertmanagerSpec:
-      storage:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: gp2-ebs
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 5Gi
+    # alertmanagerSpec:
+      # storage:
+      #   volumeClaimTemplate:
+      #     spec:
+      #       storageClassName: gp2-ebs
+      #       accessModes: ["ReadWriteOnce"]
+      #       resources:
+      #         requests:
+      #           storage: 5Gi
     config:
       global:
         resolve_timeout: 5m
@@ -136,6 +155,13 @@ prometheus-blackbox-exporter:
         http:
           valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
           follow_redirects: true
+      http_405_ok:
+        prober: http
+        timeout: 5s
+        http:
+          valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+          follow_redirects: true
+          valid_status_codes: [200, 405]
       tcp_connect:
         prober: tcp
         timeout: 5s
