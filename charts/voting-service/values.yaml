@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: "latest"
 
 imagePullSecrets: []
@@ -86,15 +86,6 @@ volumeMounts:
 db:
   host: voting-service-postgresql
   port: 5432
-
-postgresql:
-  auth:
-    existingSecret: voting-service-secret
-    database: voting_db
-    username: admin
-  primary:
-    persistence:
-      enabled: false
 
 global:
   aws:

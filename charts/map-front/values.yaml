@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: "latest"
 
 imagePullSecrets: []
