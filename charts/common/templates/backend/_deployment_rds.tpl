@@ -1,7 +1,7 @@
 {{/*
-Django deployment template
+RDS deployment template
 */}}
-{{- define "django.deployment" -}}
+{{- define "rds.deployment" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

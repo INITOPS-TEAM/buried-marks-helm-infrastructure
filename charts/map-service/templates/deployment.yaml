@@ -1,1 +1,1 @@
-{{- include "django.deployment" . -}}
+{{- include "rds.deployment" . -}}
