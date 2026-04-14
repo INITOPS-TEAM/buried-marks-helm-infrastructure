@@ -69,6 +69,10 @@ spec:
           env:
             - name: DB_HOST
               value: {{ .Values.db.host }}
+            {{- with .Values.s3 }}
+            - name: AWS_STORAGE_BUCKET_NAME
+              value: {{ .bucketName }}
+            {{- end }}
             - name: POD_IP
               valueFrom:
                 fieldRef:

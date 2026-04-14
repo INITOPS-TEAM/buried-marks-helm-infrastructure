@@ -76,6 +76,9 @@ db:
   host: map-service-mariadb
   port: 3306
 
+s3:
+  bucketName: env-bucket-name
+
 global:
   aws:
     region: eu-north-1
