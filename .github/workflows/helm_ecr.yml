@@ -81,6 +81,9 @@ jobs:
         helm dependency update charts/map-service
         helm package charts/map-service
         
+        helm dependency update charts/mcp
+        helm package charts/mcp
+        
         helm dependency update charts/monitoring
         helm package charts/monitoring
         
@@ -146,6 +149,14 @@ jobs:
         helm push $(find . -type f -name "buried-marks-helm-map-microservice-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
         
         helm push $(find . -type f -name "buried-marks-helm-map-microservice-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        
+        
+        helm push $(find . -type f -name "buried-marks-helm-mcp-*.tgz") oci://995303881249.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-mcp-*.tgz") oci://492052863680.dkr.ecr.eu-north-1.amazonaws.com/
+        
+        helm push $(find . -type f -name "buried-marks-helm-mcp-*.tgz") oci://833822972731.dkr.ecr.eu-north-1.amazonaws.com/
         
         
         
