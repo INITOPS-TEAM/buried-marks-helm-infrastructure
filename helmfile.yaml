@@ -7,8 +7,8 @@ environments:
   stage:
     values:
       - env: stage
-        domain: marks.stage.command-line.top
-        baseDomain: command-line.top
+        domain: marks.stage.buried-marks.pp.ua
+        baseDomain: buried-marks.pp.ua
   prod:
     values:
       - env: prod
@@ -93,5 +93,11 @@ releases:
   chart: charts/monitoring
   namespace: monitoring
   createNamespace: true
+  values:
+  - values/{{ .Environment.Name }}-values.yaml
+
+- name: mcp
+  chart: charts/mcp
+  namespace: buried-marks
   values:
   - values/{{ .Environment.Name }}-values.yaml

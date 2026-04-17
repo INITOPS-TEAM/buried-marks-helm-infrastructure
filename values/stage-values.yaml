@@ -12,6 +12,7 @@ global:
     buried-marks-helm-map-microservice: "map-service"
     buried-marks-helm-voting-microservice: "voting-service"
     buried-marks-helm-mail-microservice: "mail-service"
+    buried-marks-helm-mcp: "mcp"
 
 elb:
   certificateArn: "arn:aws:acm:eu-north-1:492052863680:certificate/e1eefdab-e668-4d1d-9649-d53a68fff7c4"
@@ -22,7 +23,7 @@ gateway:
 
 map-service:
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
@@ -30,7 +31,7 @@ map-service:
 
 auth-service:
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-authentication-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
@@ -38,13 +39,13 @@ auth-service:
 
 mail-service:
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
 
 voting-service:
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-microservice
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
@@ -53,7 +54,7 @@ voting-service:
 login-front:
   replicaCount: 2
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-login-front
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
@@ -62,7 +63,7 @@ login-front:
 map-front:
   replicaCount: 2
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-map-front
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
@@ -71,7 +72,7 @@ map-front:
 voting-front:
   replicaCount: 2
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-voting-front
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
@@ -80,7 +81,15 @@ voting-front:
 admin-front:
   replicaCount: 2
   image:
-    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  httpRoute:
+    enabled: false
+
+mcp:
+  image:
+    repository: 492052863680.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mcp
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:
