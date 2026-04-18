@@ -1,5 +1,8 @@
 replicaCount: 1
 
+podAnnotations:
+  consul.hashicorp.com/connect-inject: "true"
+
 image:
   repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mail-microservice
   pullPolicy: Always
