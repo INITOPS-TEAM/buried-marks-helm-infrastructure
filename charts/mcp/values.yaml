@@ -1,0 +1,63 @@
+replicaCount: 1
+
+image:
+  repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mcp-microservice
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+# - name: ecr-secret
+
+serviceAccount:
+  create: false
+  automount: false
+  annotations: {}
+  name: ""
+
+podSecurityContext: {}
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 8080
+
+httpRoute:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
+envSecret: mcp-secret
+awsSecretName: buried-marks/mcp
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 15
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 3
+  periodSeconds: 10
+
+global:
+  aws:
+    region: eu-north-1
+  secrets:
+    mcp: buried-marks/mсp
+    buried-marks-helm-mcp: buried-marks/mcp

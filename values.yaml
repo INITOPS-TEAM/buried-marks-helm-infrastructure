@@ -8,6 +8,7 @@ global:
     voting-service: buried-marks/voting-service
     map-front: buried-marks/map-front
     monitoring: buried-marks/monitoring
+    mcp-service: buried-marks/mcp
   isEKS: false
   gateway:
     name: buried-marks-gateway
