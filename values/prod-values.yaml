@@ -12,6 +12,7 @@ global:
     buried-marks-helm-map-microservice: "map-service"
     buried-marks-helm-voting-microservice: "voting-service"
     buried-marks-helm-mail-microservice: "mail-service"
+    buried-marks-helm-mcp: "mcp"
 
 elb:
   certificateArn: "arn:aws:acm:eu-north-1:833822972731:certificate/0dfdb5cb-1796-46e3-a87c-9b22e1addb2e"
@@ -125,6 +126,15 @@ admin-front:
   replicaCount: 2
   image:
     repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-admin-front
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  httpRoute:
+    enabled: false
+
+mcp:
+  replicaCount: 2
+  image:
+    repository: 833822972731.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mcp
     pullPolicy: IfNotPresent
     tag: "latest"
   httpRoute:

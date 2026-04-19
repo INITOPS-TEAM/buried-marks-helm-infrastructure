@@ -12,6 +12,7 @@ global:
     buried-marks-helm-map-microservice: "map-service"
     buried-marks-helm-voting-microservice: "voting-service"
     buried-marks-helm-mail-microservice: "mail-service"
+    buried-marks-helm-mcp: "mcp"
 
 map-service:
   image:
@@ -94,6 +95,15 @@ admin-front:
     pullPolicy: Never
     tag: "latest"
   imagePullSecrets: []
+  httpRoute:
+    enabled: true
+
+mcp:
+  image:
+    repository: 531331080468.dkr.ecr.eu-north-1.amazonaws.com/buried-marks-mcp
+    pullPolicy: Never
+    tag: "latest"
+  imagePullSecrets: [ ]
   httpRoute:
     enabled: true
 

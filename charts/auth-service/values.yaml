@@ -71,6 +71,10 @@ httpRoute:
     - path:
         type: PathPrefix
         value: /accept-invite/
+  - matches:
+      - path:
+          type: PathPrefix
+          value: /architect/mcp-moderation/
 
 resources: {}
 

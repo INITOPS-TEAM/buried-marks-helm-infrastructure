@@ -47,6 +47,10 @@ httpRoute:
     - path:
         type: PathPrefix
         value: /api/categories/
+  - matches:
+      - path:
+          type: PathPrefix
+          value: /api/internal/marks/
 
 resources: {}
 
@@ -78,6 +82,9 @@ volumeMounts:
 db:
   host: map-service-mariadb
   port: 3306
+
+s3:
+  bucketName: env-bucket-name
 
 global:
   aws:
